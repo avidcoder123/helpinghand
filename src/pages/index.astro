@@ -1,8 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 ---
 
 <Layout title="HelpingHand">
-	<h1>Hello Astro</h1>
+	<div class="flex flex-col items-center">
+		<div class="text-center mt-40">
+			<h1 class="text-5xl text-white">HelpingHand</h1>
+			<h2 class="text-3xl text-white mt-6">The #1 Place for sharing your homework assignments!</h2>
+		</div>
+		<div class="mt-10 flex-row space-x-10">
+			<button class="btn btn-lg btn-info">Login</button>
+			<button class="btn btn-lg btn-success">Register</button>
+		</div>
+		<div class="mt-40 flex flex-row space-x-16">
+			<div class="card w-96 h-96 bg-info-content shadow-xl items-center">
+				<div class="card-body text-center items-center pt-32">
+					<h2 class="card-title text-white text-3xl mb-3">
+						Join Classes
+					</h2>
+					<p>
+						Select the classes you're in to make sure you only get answers which matter.
+					</p>
+				</div>
+			</div>
+			<div class="card w-96 h-96 bg-info-content shadow-xl items-center">
+				<div class="card-body text-center items-center pt-28">
+					<h2 class="card-title text-white text-3xl mb-3">
+						Post Your Assignments
+					</h2>
+					<p>
+						Share your answers with those who need them.
+					</p>
+				</div>
+			</div>
+			<div class="card w-96 h-96 bg-info-content shadow-xl items-center">
+				<div class="card-body text-center items-center pt-32">
+					<h2 class="card-title text-white text-3xl mb-3">
+						Get Answers
+					</h2>
+					<p>
+						Find your desired assignment and just copy the answers!
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </Layout>
