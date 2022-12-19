@@ -1,7 +1,7 @@
 ---
 export interface Props {
 	title: string,
-	loggedIn: boolean
+	loggedIn?: boolean
 }
 
 const { title, loggedIn = false } = Astro.props;
