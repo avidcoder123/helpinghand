@@ -12,81 +12,36 @@ export default class User {
 
     public static currentUser?: User
 
-    static register(): {
-        success: boolean, message: string
-    } {
-        try {
-            //Replaced with Supabase google login stuff
-            const email = "ummo2564@student.harmonytx.org"
-            const name = "Umar Mohammad"
-
-            if(email.split("@")[1] !== "student.harmonytx.org") {
-                return {
-                    success: true,
-                    message: "Email address must belong to a Harmony Student. Try again with your school email."
-                }
-            } else {
-                const newUser = new User()
-                User.usersList.push(newUser)
-                User.currentUser = newUser
-    
-                return {
-                    success: true,
-                    message: ""
-                }
-            }
-        } catch(error) {
-            return {
-                success: false,
-                message: String(error)
-            }
+    static async register() {
+        //Replaced with Supabase google login stuff
+        const email = "ummo2564@student.harmonytx.org"
+        const name = "Umar Mohammad"
+        const userId = User.usersList.findIndex(x => x.email === email)
+        if(email.split("@")[1] !== "student.harmonytx.org") {
+            throw "Email address must belong to a Harmony Student. Try again with your school email."
+        } else if(userId !== -1) {
+            throw "That user already exists. Try logging in instead."
+        } else {
+            const newUser = new User()
+            User.usersList.push(newUser)
+            User.currentUser = newUser
         }
     }
 
-    static login(): {
-        success: boolean, message: string
-    } {
-        try {
-            //Replaced with Supabase google stuff
-            const email = "ummo2564@student.harmonytx.org"
-            const name = "Umar Mohammad"
-
-            const userId = User.usersList.findIndex(x => x.email === email)
-
-            if(userId !== -1) {
-                User.currentUser = User.usersList[userId]
-
-                return {
-                    success: true,
-                    message: ""
-                }
-            } else {
-                //Autoregister user
-                if(email.split("@")[1] !== "student.harmonytx.org") {
-                    return {
-                        success: true,
-                        message: "Email address must belong to a Harmony Student. Try again with your school email."
-                    }
-                } else {
-                    const newUser = new User()
-                    User.usersList.push(newUser)
-                    User.currentUser = newUser
-        
-                    return {
-                        success: true,
-                        message: ""
-                    }
-                }
-            }
-        } catch(error) {
-            return {
-                success: false,
-                message: String(error)
-            }
+    static async login() {
+        //Replaced with Supabase google stuff
+        const email = "ummo2564@student.harmonytx.org"
+        const name = "Umar Mohammad"
+        const userId = User.usersList.findIndex(x => x.email === email)
+        if(userId !== -1) {
+            User.currentUser = User.usersList[userId]
+        } else {
+            throw "An account with that email does not exist. Try registering instead."
         }
+
     }
 
-    static logout() {
+    static async logout() {
         //Do Supabase logout here
         User.currentUser = undefined
     }
