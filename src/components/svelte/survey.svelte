@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Class from "../lib/class";
-    import User from "../lib/user";
+    import Class from "../../lib/class";
+    import User from "../../lib/user";
 
     if(!User.currentUser) {
         location.replace("/")
@@ -26,8 +26,8 @@
 </script>
 
 <div class="flex flex-col items-center">
-    <h1 class="text-center text-5xl mt-10 text-white">Tell us a bit more about yourself.</h1>
-    <h2 class="text-center text-4xl mt-10 text-white">Grade Level</h2>
+    <h1 class="text-center text-xl sm:text-4xl 2xl:text-5xl mt-10 text-white">Tell us a bit more about yourself.</h1>
+    <h2 class="text-center text-lg sm:text-2xl 2xl:text-4xl mt-10 text-white">Grade Level</h2>
     <div class="btn-group mt-5">
         {#each grades as level}
             <input bind:group={grade} type="radio" name="grade" data-title={level} value={level} class="btn btn-lg" />
@@ -35,7 +35,7 @@
 
     </div>
 
-    <h1 class="text-center text-4xl mt-16 text-white">Your Enrolled Classes</h1>
+    <h1 class="text-center text-lg sm:text-2xl 2xl:text-4xl mt-16 text-white">Your Enrolled Classes</h1>
     {#if grade}
         {#await Class.getByGrade(grade) then list}
             <div class="flex flex-col items-start w-96 mt-5">

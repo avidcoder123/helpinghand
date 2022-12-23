@@ -1,5 +1,5 @@
 <script lang="ts">
-    import User from "../lib/user"
+    import User from "../../lib/user"
     import { onMount } from "svelte"
     import Survey from "./survey.svelte";
 
