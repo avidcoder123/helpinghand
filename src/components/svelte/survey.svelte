@@ -21,7 +21,7 @@
                 c => User.currentUser?.enrollClass(c)
             )
         ))
-        .then(() => location.replace("/")/*Replace this URL later!*/)
+        .then(() => location.replace("/dashboard"))
     }
 </script>
 

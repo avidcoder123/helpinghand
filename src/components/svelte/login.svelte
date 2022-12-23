@@ -4,7 +4,7 @@
     async function auth() {
         try {
             await User.login()
-            location.replace("/")
+            location.replace("/dashboard")
         } catch(e) {
             throw e
         }

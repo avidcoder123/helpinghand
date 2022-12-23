@@ -6,7 +6,7 @@ export default class User {
     email: string
     name: string
 
-    private classes: Class[] = []
+    private classes: Class[] = [new Class(0, "Imposter Studies", [10, 11, 12])]
     private grade: number = 6
     
     async getClasses(){
@@ -14,7 +14,7 @@ export default class User {
     }
     
     async addClass(classId: number) {
-        let c = Class.classList.find(x => x.id = classId)
+        let c = Class.classList.find(x => x.id == classId)
         if (c) {
             this.classes.push(c)
         } else {
@@ -30,7 +30,21 @@ export default class User {
 
     private static usersList: User[] = []
 
-    public static currentUser?: User
+    public static _currentUser?: User
+    //To save state for development
+    public static get currentUser() {
+        if (User._currentUser) {
+            return User._currentUser
+        } else {
+            return new User()
+        }
+    }
+
+    public static set currentUser(val: User | undefined) {
+        User._currentUser = val
+    }
+
+
 
     async enrollClass(classId: number) {
         this.classes = []
