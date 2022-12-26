@@ -8,6 +8,7 @@ export default class User {
 
     private classes: Class[] = [new Class(0, "Imposter Studies", [10, 11, 12])]
     private grade: number = 6
+
     
     async getClasses(){
         return this.classes
@@ -17,6 +18,7 @@ export default class User {
         let c = Class.classList.find(x => x.id == classId)
         if (c) {
             this.classes.push(c)
+            c.addUser(this.id)
         } else {
             throw "Invalid class."
         }
@@ -26,6 +28,8 @@ export default class User {
         this.id = 1
         this.email = "ummo2564@student.harmonytx.org"
         this.name = "Umar Mohammad"
+        this.addClass(0)
+        .then(() => null)
     }
 
     private static usersList: User[] = []

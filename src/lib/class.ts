@@ -1,4 +1,6 @@
-import type User from "./user"
+import Assignment from "./assignment"
+import User from "./user"
+import _ from "lodash"
 
 export default class Class {
 
@@ -6,7 +8,9 @@ export default class Class {
     name: string
     grades: number[]
 
-    private users: User[] = []
+    private users: number[] = []
+
+    private assignments: Assignment[] = []
 
 
     static classList: Class[] = [
@@ -15,6 +19,18 @@ export default class Class {
         new Class(2,  "Deception 101", [10, 11, 12])
     ]
 
+    async getAssignments(): Promise<Assignment[][]> {
+        let list = this.assignments.sort((a, b) => new Date(a.date_created).getTime() - new Date(b.date_created).getTime())
+        let grouped = _.groupBy(list, x => new Date(x.date_created).toDateString())
+        return _.sortBy(grouped, (x, y) => y)
+    }
+
+    async addAssignment(name: string) {
+        this.assignments.push(
+            new Assignment()
+        )
+    }
+
     constructor(id: number, name: string, grades: number[]) {
         //In reality, Classes will be created by admin
         this.id = id
@@ -22,11 +38,26 @@ export default class Class {
         this.grades = grades
     }
 
+    async addUser(userId: number) {
+        this.users.push(
+            userId
+        )
+    }
+
     async userHasAccess(userId: number) {
-        return this.users.findIndex(x => x.id === userId) !== -1
+        return this.users.findIndex(x => x === userId) !== -1
     }
 
     static async getByGrade(grade: number) {
         return Class.classList.filter(x => x.grades.includes(grade))
+    }
+
+    static async getById(classId: number) {
+        const c = Class.classList.find(x => x.id === classId)
+        if(c) {
+            return c
+        } else {
+            throw "Class with that ID not found."
+        }
     }
 }

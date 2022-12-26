@@ -1,10 +1,18 @@
 ---
+import User from '../lib/user';
+
 export interface Props {
 	title: string,
 	loggedIn?: boolean
 }
 
 const { title, loggedIn = false } = Astro.props;
+
+if(loggedIn) {
+	if(User.currentUser == undefined) {
+		return Astro.redirect("/")
+	}
+}
 ---
 
 <!DOCTYPE html>

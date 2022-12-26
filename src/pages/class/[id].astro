@@ -1,0 +1,59 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Assignment from "../../lib/assignment";
+import Class from "../../lib/class";
+import User from "../../lib/user";
+
+const id = parseInt(Astro.params.id!)
+
+//Resolve class
+async function resolve() {
+    try {
+        let c = await Class.getById(id)
+        let access = await c.userHasAccess(User.currentUser!.id)
+        if(!access) {
+            throw "User does not have access to class"
+        } else {
+            c.addAssignment("Do Now")
+            return c
+        }
+    } catch {
+        return Astro.redirect("/404")
+    }
+}
+
+let c: Class | Response = await resolve()
+
+if(c instanceof Response) {
+    return c
+}
+
+let assignments = await c.getAssignments()
+
+function prettyDate(date: string) {
+    let d = new Date(date)
+    if(d.toDateString() === new Date().toDateString()) {
+        return "Today"
+    } else if (d.toDateString() === new Date(Date.now() - 864e5).toDateString()) {
+        return "Yesterday"
+    } else {
+        return d.toLocaleDateString()
+    }
+}
+
+---
+
+<Layout title={c.name} loggedIn={true}>
+    <div class="flex flex-col items-center gap-y-10">
+        <h1 class="text-center text-5xl text-white mt-10">{c.name}</h1>
+        <button class="btn btn-primary btn-lg">Post Assignment</button>
+        {assignments.map(day => (
+            <div>
+                <h1>{prettyDate(day[0].date_created)}</h1>
+                {day.map(assignment => (
+                    <p>{assignment.name}</p>
+                ))}
+            </div>
+        ))}
+    </div>
+</Layout>
