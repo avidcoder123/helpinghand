@@ -1,14 +1,12 @@
 <script lang="ts">
-    import User from "../../lib/user"
     import { onMount } from "svelte"
+    import { supabase } from "../../lib/backend";
     import Survey from "./survey.svelte";
 
     async function auth() {
-        try {
-            await User.register()
-        } catch(e) {
-            throw e
-        }
+        await supabase.auth.signInWithOAuth({ provider: "google", options: {
+            redirectTo: window.location.origin + "/survey"
+        }})
     }
 
     //Make sure auth function only runs on client
@@ -29,8 +27,6 @@
         {#await auth()}
             <h1 class="text-center text-5xl mt-10 text-white">Registering Account</h1>
             <h2 class="text-center text-3xl mt-5 text-white">You should have a popup to register with Google.</h2>
-        {:then}
-            <Survey />
         {:catch err}
             <div class="flex flex-col items-center">
                 <h3 class="text-center text-3xl mt-10 text-error">Error: {err}</h3>

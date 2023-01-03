@@ -1,13 +1,9 @@
 <script lang="ts">
-    import User from "../../lib/user"
     import { onMount } from "svelte"
+    import { supabase } from "../../lib/backend";
     async function auth() {
-        try {
-            await User.login()
-            location.replace("/dashboard")
-        } catch(e) {
-            throw e
-        }
+        await supabase.auth.signInWithOAuth({ provider: "google" })
+        location.replace("/dashboard")
     }
 
 

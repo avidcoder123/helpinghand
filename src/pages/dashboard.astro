@@ -1,32 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import User from "../lib/user";
+import { supabase } from "../lib/backend";
+import type { Class } from "../lib/db";
 
-if(User.currentUser == undefined) {
-    Astro.redirect("/")
-}
+let user = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
 
-//FOR DEVELOPMENT: Login user
-try {
-    await User.register()
-} catch {
-    await User.login()
-}
+let classids = (await supabase.from("Class_User")
+.select("class_id")).data!.map(x => x.class_id)
 
-//Get user's first name
-let username = User.currentUser?.name.split(" ")[0]
-
-let classes = await User.currentUser?.getClasses()
-
-if(User.currentUser == undefined) {
-    Astro.redirect("/")
-}
+let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
 ---
 <Layout title="Dashboard" loggedIn={true}>
-    <h1 class="text-5xl text-center text-white mt-5">Welcome, {username}!</h1>
+    <h1 class="text-5xl text-center text-white mt-5">Welcome!</h1>
     <div class="flex flex-col gap-y-5 items-center mt-10">
         {classes?.map(c => (
-            <div onclick={`location.replace("/class/${c.id}")`} style="cursor: pointer;" class="card bg-info-content w-7/12 h-20">
+            <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card bg-info-content w-7/12 h-20">
                 <div class="card-body items-center justify-center">
                     <h1 class="card-title text-center">{c.name}</h1>
                 </div>

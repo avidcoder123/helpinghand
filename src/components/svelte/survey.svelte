@@ -1,10 +1,7 @@
 <script lang="ts">
-    import Class from "../../lib/class";
-    import User from "../../lib/user";
-
-    if(!User.currentUser) {
-        location.replace("/")
-    }
+    import { supabase } from "../../lib/backend";
+    import type { PostgrestResponse } from "@supabase/supabase-js";
+    import type { Class, Class_User } from "../../lib/db";
 
 
     let grade: number | undefined = undefined
@@ -15,13 +12,32 @@
 
     //Enter data
     function enterData() {
-        User.currentUser?.setGrade(grade!)
-        .then(() => Promise.all(
-            classes.map(
-                c => User.currentUser?.enrollClass(c)
+        supabase.auth.getUser()
+        .then(user => {
+            return Promise.all(
+                classes.map(id => {
+                    console.log(user.data)
+                    console.log(id)
+                    return supabase.from("Class_User")
+                        .upsert<Class_User>({
+                            class_id: id,
+                            user_id: user.data.user?.id!
+                        }, {ignoreDuplicates: false})
+                })
             )
-        ))
+        })
         .then(() => location.replace("/dashboard"))
+    }
+
+    async function getByGrade(grade: number) {
+        let list: PostgrestResponse<Class> = await supabase.from("Class")
+            .select("*")
+            .contains("grades", [grade])
+        if(!list.data) {
+            return []
+        } else {
+            return list.data
+        }
     }
 </script>
 
@@ -37,7 +53,7 @@
 
     <h1 class="text-center text-lg sm:text-2xl 2xl:text-4xl mt-16 text-white">Your Enrolled Classes</h1>
     {#if grade}
-        {#await Class.getByGrade(grade) then list}
+        {#await getByGrade(grade) then list}
             <div class="flex flex-col items-start w-96 mt-5">
                 {#each list as c}
                     <label class="cursor-pointer label">

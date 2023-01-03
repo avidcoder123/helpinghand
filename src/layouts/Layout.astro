@@ -1,5 +1,5 @@
 ---
-import User from '../lib/user';
+import { supabase } from '../lib/backend';
 
 export interface Props {
 	title: string,
@@ -9,10 +9,26 @@ export interface Props {
 const { title, loggedIn = false } = Astro.props;
 
 if(loggedIn) {
-	if(User.currentUser == undefined) {
-		return Astro.redirect("/")
+	const refreshToken = Astro.cookies.get("my-refresh-token").value
+	const accessToken = Astro.cookies.get("my-access-token").value
+
+	if (refreshToken && accessToken) {
+		await supabase.auth.setSession({
+			refresh_token: refreshToken,
+			access_token: accessToken,
+		})
 	}
+
+	const currentUser = (await supabase.auth.getUser(accessToken)).data.user
+
+	var unauth = loggedIn && currentUser === null
+} else {
+	var unauth = false
 }
+
+
+
+
 ---
 
 <!DOCTYPE html>
@@ -27,7 +43,7 @@ if(loggedIn) {
 	<body>
 		<div class="navbar bg-info-content">
 			<div class="flex-1">
-				<a class="btn btn-ghost normal-case text-xl">HelpingHand</a>
+				<a class="btn btn-ghost normal-case text-xl" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
 				<div class="flex-none ml-3">
 					<ul class="menu menu-horizontal">
 						{loggedIn && <li><a href="/logout" class="text-xl">Logout</a></li>}
@@ -35,6 +51,6 @@ if(loggedIn) {
 				</div>
 			</div>
 		</div>
-		<slot />
+		{!unauth ? <slot /> : <script>location.replace("/")</script>}
 	</body>
 </html>

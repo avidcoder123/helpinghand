@@ -1,34 +1,48 @@
 ---
+import type { PostgrestResponse } from "@supabase/supabase-js";
+import _ from "lodash";
+import Assignmentlist from "../../components/assignmentlist.astro";
 import Layout from "../../layouts/Layout.astro";
-import Assignment from "../../lib/assignment";
-import Class from "../../lib/class";
-import User from "../../lib/user";
+import { supabase } from "../../lib/backend";
+import type { Assignment, Class } from "../../lib/db";
 
 const id = parseInt(Astro.params.id!)
 
 //Resolve class
-async function resolve() {
+async function resolve(): Promise<Class[] | Response> {
     try {
-        let c = await Class.getById(id)
-        let access = await c.userHasAccess(User.currentUser!.id)
+        const currentUser = await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)
+        let {data: c, error}: PostgrestResponse<Class>= await supabase.from("Class").select("*").eq("id", id).limit(1)
+        console.log(c)
+        if(error || c==null) throw error
+        let access = (await supabase.from("Class_User").select(undefined, {count: "exact"}).eq("user_id", currentUser.data.user?.id).limit(1)).count! >= 1
+        console.log(access)
         if(!access) {
             throw "User does not have access to class"
         } else {
-            c.addAssignment("Do Now")
-            return c
+            return c!
         }
     } catch {
         return Astro.redirect("/404")
     }
 }
 
-let c: Class | Response = await resolve()
+let c: Class[] | Response = await resolve()
 
 if(c instanceof Response) {
     return c
 }
 
-let assignments = await c.getAssignments()
+let _class = c[0]
+
+let {data: alist}: PostgrestResponse<Assignment> = await supabase.from("Assignment")
+    .select("*")
+    .eq("class_id", _class.id)
+    .order("created_at", {ascending: false})
+    .limit(50)
+
+let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at).toDateString()), (x,y) => y)
+
 
 function prettyDate(date: string) {
     let d = new Date(date)
@@ -43,17 +57,12 @@ function prettyDate(date: string) {
 
 ---
 
-<Layout title={c.name} loggedIn={true}>
+<Layout title={_class.name} loggedIn={true}>
     <div class="flex flex-col items-center gap-y-10">
-        <h1 class="text-center text-5xl text-white mt-10">{c.name}</h1>
+        <h1 class="text-center text-5xl text-white mt-10">{_class.name}</h1>
         <button class="btn btn-primary btn-lg">Post Assignment</button>
         {assignments.map(day => (
-            <div>
-                <h1>{prettyDate(day[0].date_created)}</h1>
-                {day.map(assignment => (
-                    <p>{assignment.name}</p>
-                ))}
-            </div>
+            <Assignmentlist day={day} />
         ))}
     </div>
 </Layout>

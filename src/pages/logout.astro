@@ -1,6 +1,5 @@
 <script>
-    import User from "../lib/user"
-
-    await User.logout()
+    import { supabase } from "../lib/backend"
+    await supabase.auth.signOut()
     location.replace("/")
 </script>
