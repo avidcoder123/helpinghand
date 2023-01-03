@@ -2,8 +2,9 @@
     import { onMount } from "svelte"
     import { supabase } from "../../lib/backend";
     async function auth() {
-        await supabase.auth.signInWithOAuth({ provider: "google" })
-        location.replace("/dashboard")
+        await supabase.auth.signInWithOAuth({ provider: "google", options: {
+            redirectTo: window.location.origin + "/callback"
+        }})
     }
 
 

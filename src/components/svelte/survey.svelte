@@ -16,8 +16,6 @@
         .then(user => {
             return Promise.all(
                 classes.map(id => {
-                    console.log(user.data)
-                    console.log(id)
                     return supabase.from("Class_User")
                         .upsert<Class_User>({
                             class_id: id,

@@ -13,10 +13,8 @@ async function resolve(): Promise<Class[] | Response> {
     try {
         const currentUser = await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)
         let {data: c, error}: PostgrestResponse<Class>= await supabase.from("Class").select("*").eq("id", id).limit(1)
-        console.log(c)
         if(error || c==null) throw error
         let access = (await supabase.from("Class_User").select(undefined, {count: "exact"}).eq("user_id", currentUser.data.user?.id).limit(1)).count! >= 1
-        console.log(access)
         if(!access) {
             throw "User does not have access to class"
         } else {
@@ -42,25 +40,12 @@ let {data: alist}: PostgrestResponse<Assignment> = await supabase.from("Assignme
     .limit(50)
 
 let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at).toDateString()), (x,y) => y)
-
-
-function prettyDate(date: string) {
-    let d = new Date(date)
-    if(d.toDateString() === new Date().toDateString()) {
-        return "Today"
-    } else if (d.toDateString() === new Date(Date.now() - 864e5).toDateString()) {
-        return "Yesterday"
-    } else {
-        return d.toLocaleDateString()
-    }
-}
-
 ---
 
 <Layout title={_class.name} loggedIn={true}>
     <div class="flex flex-col items-center gap-y-10">
         <h1 class="text-center text-5xl text-white mt-10">{_class.name}</h1>
-        <button class="btn btn-primary btn-lg">Post Assignment</button>
+        <button class="btn btn-primary btn-lg" onclick="window.location = '/assignment/new'">Post Assignment</button>
         {assignments.map(day => (
             <Assignmentlist day={day} />
         ))}

@@ -4,7 +4,8 @@ const supabaseUrl = 'https://tzkfqozchfdkixqkvmoo.supabase.co'
 const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6a2Zxb3pjaGZka2l4cWt2bW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzEwNTg1NTMsImV4cCI6MTk4NjYzNDU1M30.Nbz5rGhfhQ6Mt0133KWRkzlrRWoMuDjiddx64BChsw4"
 export const supabase = createClient(supabaseUrl, key)
 
-supabase.auth.onAuthStateChange((event, session) => {
+if(typeof document !== undefined) {
+  supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT' || event === 'USER_DELETED') {
       // delete cookies on sign out
       const expires = new Date(0).toUTCString()
@@ -16,3 +17,4 @@ supabase.auth.onAuthStateChange((event, session) => {
       document.cookie = `my-refresh-token=${session?.refresh_token}; path=/; max-age=${maxAge}; SameSite=Lax; secure`
     }
   })
+}
