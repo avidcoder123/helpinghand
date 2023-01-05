@@ -1,7 +1,7 @@
 export interface Assignment {
     id?: number,
-    created_at: string,
-    user_id: string,
+    created_at?: string,
+    user_id?: string,
     class_id: number,
     name: string
 }
@@ -21,7 +21,6 @@ export interface Class_User {
 export interface Question {
     id?: number,
     number: number,
-    is_freeresponse: boolean,
     is_file: boolean,
     text: string,
     answer: string,

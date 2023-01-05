@@ -39,13 +39,13 @@ let {data: alist}: PostgrestResponse<Assignment> = await supabase.from("Assignme
     .order("created_at", {ascending: false})
     .limit(50)
 
-let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at).toDateString()), (x,y) => y)
+let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at!).toDateString()), (x,y) => y)
 ---
 
 <Layout title={_class.name} loggedIn={true}>
     <div class="flex flex-col items-center gap-y-10">
         <h1 class="text-center text-5xl text-white mt-10">{_class.name}</h1>
-        <button class="btn btn-primary btn-lg" onclick="window.location = '/assignment/new'">Post Assignment</button>
+        <button class="btn btn-primary btn-lg" onclick={`window.location = '/assignment/new?class=${id}'`}>Post Assignment</button>
         {assignments.map(day => (
             <Assignmentlist day={day} />
         ))}
