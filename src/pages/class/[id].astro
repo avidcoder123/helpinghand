@@ -14,12 +14,7 @@ async function resolve(): Promise<Class[] | Response> {
         const currentUser = await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)
         let {data: c, error}: PostgrestResponse<Class>= await supabase.from("Class").select("*").eq("id", id).limit(1)
         if(error || c==null) throw error
-        let access = (await supabase.from("Class_User").select(undefined, {count: "exact"}).eq("user_id", currentUser.data.user?.id).limit(1)).count! >= 1
-        if(!access) {
-            throw "User does not have access to class"
-        } else {
-            return c!
-        }
+        return c!
     } catch {
         return Astro.redirect("/404")
     }
