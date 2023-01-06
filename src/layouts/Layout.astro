@@ -33,6 +33,7 @@ if(loggedIn) {
 <script>
 	import { supabase } from "../lib/backend"
 
+	//@ts-ignore
 	window.feedback = () => {
 		let feed = prompt("Please enter your feedback or suggestions:")
 		supabase.from("Feedback").insert({text: feed})
