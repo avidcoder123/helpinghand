@@ -51,10 +51,10 @@ if(loggedIn) {
 		<title>{title}</title>
 	</head>
 	<body>
-		<div data-theme="night" class="w-full h-full">
-			<div class="navbar bg-info-content">
+		<div  class="w-full h-full">
+			<div class="navbar bg-info-content" id="Nav">
 				<div class="flex-1">
-					<a class="btn btn-ghost normal-case text-xl" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
+					<a class="btn btn-ghost normal-case text-xl text-white" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
 					<div class="flex-none ml-3">
 						<ul class="menu menu-horizontal">
 							<li><a class="text-xl" onclick="window.feedback()">Feedback</a></li>
@@ -67,3 +67,12 @@ if(loggedIn) {
 		</div>
 	</body>
 </html>
+
+<style is:global>
+	body {
+		background-color: #040F16;
+	}
+	#Nav {
+		background-color: #00002e;
+	}
+</style>

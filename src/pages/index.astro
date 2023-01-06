@@ -26,7 +26,7 @@ import { supabase } from "../lib/backend";
 		</div>
 		<div class="mt-40 grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 sm:gap-x-10 gap-y-10">
 			<div class="card sm:w-96 sm:h-80 2xl:w-96 2xl:h-96 bg-info-content shadow-xl items-center">
-				<div class="card-body text-center items-center pt-10">
+				<div class="card-body text-center items-center pt-10" id="CTOCard">
 					<Hand client:only="svelte"/>
 					<h2 class="card-title text-white text-3xl mb-3">
 						Join Classes
@@ -37,7 +37,7 @@ import { supabase } from "../lib/backend";
 				</div>
 			</div>
 			<div class="card sm:w-96 sm:h-80 2xl:w-96 2xl:h-96 bg-info-content shadow-xl items-center">
-				<div class="card-body text-center items-center pt-10">
+				<div class="card-body text-center items-center pt-10" id="CTOCard">
 					<Post client:only="svelte"/>
 					<h2 class="card-title text-white text-3xl mb-3">
 						Post Your Assignments
@@ -48,7 +48,7 @@ import { supabase } from "../lib/backend";
 				</div>
 			</div>
 			<div class="card sm:w-96 sm:h-80 2xl:w-96 2xl:h-96 bg-info-content shadow-xl items-center">
-				<div class="card-body text-center items-center pt-10">
+				<div class="card-body text-center items-center pt-10" id="CTOCard">
 					<Answers client:only="svelte"/>
 					<h2 class="card-title text-white text-3xl mb-3">
 						Get Answers
@@ -64,3 +64,9 @@ import { supabase } from "../lib/backend";
 
 	</div>
 </Layout>
+
+<style is:global>
+	#CTOCard {
+		background-color: #001242;
+	}
+</style>
