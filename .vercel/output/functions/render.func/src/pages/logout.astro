@@ -1,0 +1,5 @@
+<script>
+    import { supabase } from "../lib/backend"
+    await supabase.auth.signOut()
+    location.replace("/")
+</script>

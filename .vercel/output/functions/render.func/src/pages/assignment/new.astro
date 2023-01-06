@@ -1,0 +1,7 @@
+---
+import Newassignment from "../../components/svelte/newassignment.svelte";
+import Layout from "../../layouts/Layout.astro";
+---
+<Layout title="New Assignment" loggedIn={true}>
+    <Newassignment client:load />
+</Layout>

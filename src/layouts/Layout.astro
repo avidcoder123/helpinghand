@@ -50,17 +50,19 @@ if(loggedIn) {
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="navbar bg-info-content">
-			<div class="flex-1">
-				<a class="btn btn-ghost normal-case text-xl" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
-				<div class="flex-none ml-3">
-					<ul class="menu menu-horizontal">
-						<li><a class="text-xl" onclick="window.feedback()">Feedback</a></li>
-						{loggedIn && <li><a href="/logout" class="text-xl">Logout</a></li>}
-					</ul>
+		<div data-theme="night" class="w-full h-full">
+			<div class="navbar bg-info-content">
+				<div class="flex-1">
+					<a class="btn btn-ghost normal-case text-xl" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
+					<div class="flex-none ml-3">
+						<ul class="menu menu-horizontal">
+							<li><a class="text-xl" onclick="window.feedback()">Feedback</a></li>
+							{loggedIn && <li><a href="/logout" class="text-xl">Logout</a></li>}
+						</ul>
+					</div>
 				</div>
 			</div>
+			{!unauth ? <slot /> : <script>location.replace("/")</script>}
 		</div>
-		{!unauth ? <slot /> : <script>location.replace("/")</script>}
 	</body>
 </html>

@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "../lib/backend";
+import type { Class } from "../lib/db";
+
+let user = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
+
+let classids = (await supabase.from("Class_User")
+.select("class_id")).data!.map(x => x.class_id)
+
+let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
+---
+<Layout title="Dashboard" loggedIn={true}>
+    <h1 class="text-5xl text-center text-white mt-5">Welcome!</h1>
+    <div class="flex flex-col gap-y-5 items-center mt-10">
+        {classes?.map(c => (
+            <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card bg-info-content w-7/12 h-20">
+                <div class="card-body items-center justify-center">
+                    <h1 class="card-title text-center">{c.name}</h1>
+                </div>
+            </div>
+        ))}
+    </div>
+</Layout>
