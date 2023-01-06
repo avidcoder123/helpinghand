@@ -25,8 +25,7 @@
         for(let question of questions) {
             if(question.is_file) {
                 const file = question.files!.item(0)!
-                const extension = file.name.split(".")[file.name.split(".").length - 1]
-                let { error } = await supabase.storage.from("answers").upload(`${question.answer}.${extension}`, file)
+                let { error } = await supabase.storage.from("answers").upload(question.answer, file)
                 if(error) throw error
             }
         } 

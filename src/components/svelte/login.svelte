@@ -1,6 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte"
     import { supabase } from "../../lib/backend";
+
+    supabase.auth.getUser()
+    .then(d => {
+        if(d.data.user) {
+            window.location.href = "/dashboard"
+        }
+    })
+
     async function auth() {
         await supabase.auth.signInWithOAuth({ provider: "google", options: {
             redirectTo: window.location.origin + "/callback"

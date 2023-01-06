@@ -30,6 +30,15 @@ if(loggedIn) {
 
 
 ---
+<script>
+	import { supabase } from "../lib/backend"
+
+	window.feedback = () => {
+		let feed = prompt("Please enter your feedback or suggestions:")
+		supabase.from("Feedback").insert({text: feed})
+		.then(() => null)
+	}
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +55,7 @@ if(loggedIn) {
 				<a class="btn btn-ghost normal-case text-xl" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
 				<div class="flex-none ml-3">
 					<ul class="menu menu-horizontal">
+						<li><a class="text-xl" onclick="window.feedback()">Feedback</a></li>
 						{loggedIn && <li><a href="/logout" class="text-xl">Logout</a></li>}
 					</ul>
 				</div>
