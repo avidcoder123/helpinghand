@@ -28,7 +28,7 @@
             <div class="flex flex-col items-center gap-y-2 my-5">
                 <h2 class="text-white text-2xl 2xl:text-4xl text-left w-96">{question.number}. {question.text}</h2>
                 {#if question.is_file}
-                    <img width="25%" alt="Answers" src={"https://tzkfqozchfdkixqkvmoo.supabase.co/storage/v1/object/public/answers/" + question.answer}>
+                    <img width="30%" alt="Answers" src={"https://tzkfqozchfdkixqkvmoo.supabase.co/storage/v1/object/public/answers/" + question.answer}>
                 {:else}
                     <h2 class="text-lg 2xl:text-2xl text-left w-96"><span class=" text-blue-500">Answer: </span>{question.answer}</h2>
                 {/if}
