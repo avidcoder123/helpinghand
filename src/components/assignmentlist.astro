@@ -24,7 +24,7 @@ let { day } = Astro.props
     {day.map(assignment =>(
         <div onclick={`window.location = "/assignment/${assignment.id}"`} style="cursor: pointer;" class="card bg-info-content w-7/12 h-20">
             <div class="card-body items-center justify-center">
-                <h1 class="card-title text-center">{assignment.name}</h1>
+                <h1 class="card-title text-center text-white">{assignment.name}</h1>
             </div>
         </div>
     ))}
