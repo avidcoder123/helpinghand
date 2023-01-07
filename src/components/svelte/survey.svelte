@@ -1,6 +1,6 @@
 <script lang="ts">
     import { supabase } from "../../lib/backend";
-    import type { PostgrestResponse } from "@supabase/supabase-js";
+    import type { PostgrestResponse, UserResponse } from "@supabase/supabase-js";
     import type { Class, Class_User } from "../../lib/db";
 
 
@@ -10,20 +10,24 @@
 
     let classes: number[] = []
 
-    //Enter data
-    function enterData() {
-        supabase.auth.getUser()
-        .then(user => {
-            return Promise.all(
-                classes.map(id => {
-                    return supabase.from("Class_User")
+    async function addClasses(user: UserResponse) {
+        await supabase.from("Class_User")
+            .delete()
+            .eq("user_id", user.data.user?.id)
+
+        for(const id of classes) {
+            await supabase.from("Class_User")
                         .upsert<Class_User>({
                             class_id: id,
                             user_id: user.data.user?.id!
                         }, {ignoreDuplicates: false})
-                })
-            )
-        })
+        }
+    }
+
+    //Enter data
+    function enterData() {
+        supabase.auth.getUser()
+        .then(user => addClasses(user))
         .then(() => location.replace("/dashboard"))
     }
 
