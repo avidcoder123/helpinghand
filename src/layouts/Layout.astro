@@ -42,7 +42,7 @@ if(loggedIn) {
 </script>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -51,7 +51,7 @@ if(loggedIn) {
 		<title>{title}</title>
 	</head>
 	<body>
-		<div  class="w-full h-full">
+		<div data-theme="night" class="w-full h-full">
 			<div class="navbar bg-info-content" id="Nav">
 				<div class="flex-1">
 					<a class="btn btn-ghost normal-case text-xl text-white" href={loggedIn ? "/dashboard" : "/"}>HelpingHand</a>
