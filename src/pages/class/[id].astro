@@ -8,6 +8,9 @@ import type { Assignment, Class } from "../../lib/db";
 
 const id = parseInt(Astro.params.id!)
 
+const currentUser = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
+
+
 //Resolve class
 async function resolve(): Promise<Class[] | Response> {
     try {
@@ -37,10 +40,10 @@ let {data: alist}: PostgrestResponse<Assignment> = await supabase.from("Assignme
 let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at!).toDateString()), (x,y) => y)
 ---
 
-<Layout title={_class.name} loggedIn={true}>
+<Layout title={_class.name}>
     <div class="flex flex-col items-center gap-y-10">
         <h1 class="text-center text-5xl text-white mt-10">{_class.name}</h1>
-        <button class="btn btn-primary btn-lg" onclick={`window.location = '/assignment/new?class=${id}'`}>Post Assignment</button>
+        {currentUser && <button class="btn btn-primary btn-lg" onclick={`window.location = '/assignment/new?class=${id}'`}>Post Assignment</button>}
         {assignments.map(day => (
             <Assignmentlist day={day} />
         ))}
