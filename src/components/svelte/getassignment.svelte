@@ -30,7 +30,7 @@
                 {#if question.is_file}
                     <img width="30%" alt="Answers" src={"https://tzkfqozchfdkixqkvmoo.supabase.co/storage/v1/object/public/answers/" + question.answer}>
                 {:else}
-                    <h2 class="text-lg 2xl:text-2xl text-left"><span class=" text-blue-500">Answer: </span>{question.answer}</h2>
+                    <h2 class="text-lg 2xl:text-2xl text-left w-[50%]"><span class=" text-blue-500">Answer: </span>{question.answer}</h2>
                 {/if}
             </div>
         </div>
