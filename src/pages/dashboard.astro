@@ -12,7 +12,7 @@ let classids = (await supabase.from("Class_User")
 
 let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
 ---
-<Layout title="Dashboard" loggedIn={false}>
+<Layout title="Dashboard" loggedIn={true}>
     <!-- <h1 class="text-5xl text-center text-white mt-5 h-44">Welcome!</h1> -->
     <div class="flex justify-center sm:justify-start sm:pl-5 h-40 sm:pt-5">
     <Greeting client:only="svelte"></Greeting>
