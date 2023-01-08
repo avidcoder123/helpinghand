@@ -1,4 +1,3 @@
-
 <script>
     import { LottiePlayer } from '@lottiefiles/svelte-lottie-player';
   
@@ -17,11 +16,11 @@
       'info',
     ];
   </script>
-  <div class="flex justify-center flex-col w-screen items-center">
+  <div class="flex justify-center flex-col items-center">
   <LottiePlayer
-    src="export let Title:string"
+    src="https://assets9.lottiefiles.com/packages/lf20_c1hkermx.json"
     autoplay="{true}"
-    loop="{true}"
+    loop="{false}"
     controls="{false}"
     renderer="svg"
     background="transparent"
