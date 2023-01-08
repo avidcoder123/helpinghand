@@ -12,9 +12,9 @@ let classes: Class[] = (await supabase.from("Class").select("*").in("id", classi
 ---
 <Layout title="Dashboard" loggedIn={true}>
     <h1 class="text-5xl text-center text-white mt-5">Welcome!</h1>
-    <div class="flex flex-col gap-y-5 items-center mt-10">
+    <div class="grid grid-cols-1 sm:grid-cols-3 items-center mt-10">
         {classes?.map(c => (
-            <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card bg-info-content w-7/12 h-20">
+            <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card bg-info-content w-96 h-20">
                 <div class="card-body items-center justify-center">
                     <h1 class="card-title text-center">{c.name}</h1>
                 </div>
