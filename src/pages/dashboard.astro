@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import { supabase } from "../lib/backend";
 import type { Class } from "../lib/db";
+import Greeting from "../components/lottie/greeting.svelte";
+// https://assets7.lottiefiles.com/packages/lf20_xnbikipz.json
 
 let user = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
 
@@ -11,8 +13,11 @@ let classids = (await supabase.from("Class_User")
 let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
 ---
 <Layout title="Dashboard" loggedIn={true}>
-    <h1 class="text-5xl text-center text-white mt-5">Welcome!</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-3 items-center mt-10">
+    <!-- <h1 class="text-5xl text-center text-white mt-5 h-44">Welcome!</h1> -->
+    <div class="flex justify-center sm:justify-start sm:pl-4">
+    <Greeting client:only="svelte"></Greeting>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 items-center mt-10 gap-12">
         {classes?.map(c => (
             <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card bg-info-content w-96 h-20">
                 <div class="card-body items-center justify-center">
