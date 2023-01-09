@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UpdateCard from "../components/svelte/updateCard.svelte";
+
+
+---
+<Layout title="Updates">
+<div>
+    <p class="text-2xl text-white font-extrabold text-center pt-8">🔥Update Log🔥</p>
+    <UpdateCard client:only="svelte" Title="Update 1/9/2023"></UpdateCard>
+</div>
+</Layout>
