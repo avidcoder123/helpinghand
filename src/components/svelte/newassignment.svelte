@@ -65,6 +65,7 @@
         .catch(e => e.message)
     }
 </script>
+<div class=" w-screen h-screen">
 <h1 class="text-white text-center text-5xl mt-10">Make a New Assignment</h1>
 <div class="flex flex-col gap-y-5 items-center mt-10">
     <input type="text" bind:value={assignmentname} placeholder="Assignment Name" class="input input-bordered input-primary w-full max-w-lg" />
@@ -99,4 +100,5 @@
         </ul>
     </div>
     <button on:click={submit} class="btn btn-success" class:btn-disabled={disabled}>Create Assignment</button>
+</div>
 </div>
