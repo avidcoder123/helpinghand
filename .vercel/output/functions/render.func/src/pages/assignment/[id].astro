@@ -1,0 +1,9 @@
+---
+import Getassignment from "../../components/svelte/getassignment.svelte";
+import Layout from "../../layouts/Layout.astro";
+
+let id = parseInt(Astro.params.id!)
+---
+<Layout title="View Assignment">
+    <Getassignment client:load id={id} />
+</Layout>
