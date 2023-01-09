@@ -89,7 +89,7 @@
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <label tabindex="0"  class="btn btn-primary mt-5">+ New Question</label>
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-50">
           <!-- svelte-ignore a11y-missing-attribute -->
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li><a on:click={addFree}>Multiple Choice/Free Response</a></li>
