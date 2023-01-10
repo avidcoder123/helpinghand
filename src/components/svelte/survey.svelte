@@ -11,6 +11,7 @@
     let classes: number[] = []
 
     async function addClasses(user: UserResponse) {
+        console.log(user)
         await supabase.from("Class_User")
             .delete()
             .eq("user_id", user.data.user?.id)

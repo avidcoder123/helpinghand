@@ -7,8 +7,12 @@ import Greeting from "../components/lottie/greeting.svelte";
 
 let user = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
 
+if(user == null) {
+    location.replace("/")
+}
+
 let classids = (await supabase.from("Class_User")
-.select("class_id")).data!.map(x => x.class_id)
+.select("class_id").eq("user_id", user!.id)).data!.map(x => x.class_id)
 
 let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
 ---
