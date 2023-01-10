@@ -16,7 +16,7 @@
 
     $: disabled = !(assignmentname != ""
         && questions.length > 0 
-        && questions.every(x => x.question != "" && x.answer != ""))
+        && questions.every(x => x.question.trim() != "" && x.answer.trim() != ""))
 
     const addFree = () => questions = [...questions, {question: "", answer: "", is_file: false}]
     const addFile = () => questions = [...questions, {question: "", answer: "", is_file: true}]
