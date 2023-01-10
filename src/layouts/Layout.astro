@@ -61,24 +61,24 @@ if(loggedIn) {
 					<div class="flex-none ml-3">
 						<ul class="menu menu-horizontal gap-3">
 							<li><a class="text-xl" href="/updateLog">Update Log  <span class="indicator-item badge badge-error">NEW</span> </a></li>
-							<div class="dropdown">
-								<!-- svelte-ignore a11y-label-has-associated-control -->
-								<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-								<label tabindex="0"  class="btn  btn-ghost text-2xl">📝</label>
-								<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-								<ul tabindex="0" class="p-2 mt-1 shadow menu menu-compact dropdown-content bg-slate-900 rounded-lg w-52 outline">
-								  <!-- svelte-ignore a11y-missing-attribute -->
-								  <!-- svelte-ignore a11y-click-events-have-key-events -->
-								  <!-- svelte-ignore a11y-missing-attribute -->
-								  <!-- svelte-ignore a11y-click-events-have-key-events -->
-								  <li><a class="text-xl" onclick="window.feedback()">✐ Feedback</a></li>
-								  {loggedIn && <li><a href="/logout" class="text-xl">↩ Logout</a></li>}
-								  {loggedIn && <li><a href="/survey" class="text-xl">⚛ Change Class</a></li>}
-								</ul>
-							</div>
 
 						</ul>
 					</div>
+				</div>
+				<div class="dropdown flex-2 dropdown-end">
+					<!-- svelte-ignore a11y-label-has-associated-control -->
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<label tabindex="0"  class="btn  btn-ghost text-2xl">📝</label>
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<ul tabindex="0" class="p-2 mt-1 shadow menu menu-compact dropdown-content bg-slate-900 rounded-lg w-52 outline">
+					  <!-- svelte-ignore a11y-missing-attribute -->
+					  <!-- svelte-ignore a11y-click-events-have-key-events -->
+					  <!-- svelte-ignore a11y-missing-attribute -->
+					  <!-- svelte-ignore a11y-click-events-have-key-events -->
+					  <li><a class="text-xl" onclick="window.feedback()">✐ Feedback</a></li>
+					  {loggedIn && <li><a href="/logout" class="text-xl">↩ Logout</a></li>}
+					  {loggedIn && <li><a href="/survey" class="text-xl">⚛ Change Class</a></li>}
+					</ul>
 				</div>
 			</div>
 			{!unauth ? <slot /> : <script>location.replace("/")</script>}
