@@ -59,14 +59,14 @@ if(loggedIn) {
 				<div class="flex-1">
 					<a class="btn btn-ghost normal-case text-xl text-white" href={loggedIn ? "/dashboard" : "/"}><img src={HHIcon}></a>
 					<div class="flex-none ml-3">
-						<ul class="menu menu-horizontal">
+						<ul class="menu menu-horizontal gap-3">
 							<li><a class="text-xl" href="/updateLog">Update Log  <span class="indicator-item badge badge-error">NEW</span> </a></li>
-							<div class="dropdown dropdown-hover">
+							<div class="dropdown">
 								<!-- svelte-ignore a11y-label-has-associated-control -->
 								<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-								<label tabindex="0"  class="btn btn-primary mt-5">+ New Question</label>
+								<label tabindex="0"  class="btn btn-primary text-2xl">📝</label>
 								<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-								<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-50">
+								<ul tabindex="0" class="p-2 mt-1 shadow menu menu-compact dropdown-content bg-slate-900 rounded-lg w-auto outline">
 								  <!-- svelte-ignore a11y-missing-attribute -->
 								  <!-- svelte-ignore a11y-click-events-have-key-events -->
 								  <!-- svelte-ignore a11y-missing-attribute -->
