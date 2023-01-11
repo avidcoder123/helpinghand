@@ -22,8 +22,6 @@ if (refreshToken && accessToken) {
 	
 const currentUser = (await supabase.auth.getUser(accessToken)).data.user
 var authed = currentUser !== null
-let allowed = 
-
 
 ---
 <script>
@@ -70,13 +68,13 @@ let allowed =
 					  <!-- svelte-ignore a11y-click-events-have-key-events -->
 					  <!-- svelte-ignore a11y-missing-attribute -->
 					  <!-- svelte-ignore a11y-click-events-have-key-events -->
-					  <li><a class="text-xl " onclick="window.feedback()">✐ Feedback</a></li>
+					  <li><a class="text-xl" onclick="window.feedback()">✐ Feedback</a></li>
 					  {authed && <li><a href="/logout" class="text-xl">↩ Logout</a></li>}
-					  {authed && <li><a href="/survey" class="text-xl ">⚛ Change Classes</a></li>}
+					  {authed && <li><a href="/survey" class="text-xl">⚛ Change Classes</a></li>}
 					</ul>
 				</div>
 			</div>
-			{!authed && loggedIn ? <slot /> : <script>location.replace("/")</script>}
+			{!authed && loggedIn ? <script>location.replace("/")</script> : <slot />}
 		</div>
 	</body>
 </html>
