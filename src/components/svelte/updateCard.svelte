@@ -18,8 +18,7 @@ export let Title: string
         <p class="ml-5">Added Dev Testing class</p>
         <p class="ml-5">Added Animations</p>
         <p class="ml-5">More classes</p>
-        <!-- <p class="ml-5">hi</p> -->
+        <p class="ml-5">Added a new way to log out, and added the ability to change classes</p>
     </div>
 </div>
-
 </main>
