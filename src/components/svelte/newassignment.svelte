@@ -74,11 +74,11 @@
         {#each questions as question, idx}
             <div class="flex flex-row gap-x-3 w-full items-center justify-center"><h1 class="text-white text-2xl">{idx + 1}.</h1>   
                 <div class="flex flex-col gap-y-2 w-[32rem]">
-                    <input type="text" bind:value={question.question} placeholder="Question Text" class="input input-bordered input-primary w-full max-w-lg" />
+                    <input type="text" bind:value={question.question} placeholder="Question Text" class="input input-bordered input-primary w-96 sm:w-full max-w-lg" />
                     {#if question.is_file}
-                        <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="file-input file-input-bordered file-input-primary w-full max-w-lg" />
+                        <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="file-input file-input-bordered file-input-primary w-96 sm:w-full max-w-lg" />
                     {:else}
-                        <textarea bind:value={question.answer} class="textarea textarea-primary max-w-lg h-32" placeholder="Question Answer"></textarea>
+                        <textarea bind:value={question.answer} class="textarea textarea-primary w-96 sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
                     {/if}
                 </div>
             </div>
