@@ -22,8 +22,7 @@ if (refreshToken && accessToken) {
 	
 const currentUser = (await supabase.auth.getUser(accessToken)).data.user
 var authed = currentUser !== null
-
-
+let allowed = 
 
 
 ---
@@ -77,7 +76,7 @@ var authed = currentUser !== null
 					</ul>
 				</div>
 			</div>
-			{authed && loggedIn ? <slot /> : <script>location.replace("/")</script>}
+			{!authed && loggedIn ? <slot /> : <script>location.replace("/")</script>}
 		</div>
 	</body>
 </html>
