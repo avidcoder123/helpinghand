@@ -19,6 +19,7 @@ export let Title: string
         <p class="ml-5">Added Animations</p>
         <p class="ml-5">More classes</p>
         <p class="ml-5">Added a new way to log out, and added the ability to change classes</p>
+        <p class="ml-5">FIX UNABLE TO LOGIN</p>
     </div>
 </div>
 </main>
