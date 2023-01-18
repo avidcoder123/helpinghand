@@ -6,7 +6,7 @@ import Hand from '../components/lottie/hand.svelte';
 import Post from '../components/lottie/post.svelte';
 import Answers from '../components/lottie/answers.svelte';
 ---
-<script>
+<script is:inline>
 	const isOptionalChainingSupported = () => {
 		try {
 			eval('const foo = {}; foo?.bar');
