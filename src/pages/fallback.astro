@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { supabase } from '../lib/backend';
+import type { Class } from '../lib/db';
+
+let classes: Class[] = (await supabase.from("Class")
+    .select("*").
+    order("name", {ascending: true})).data!
+---
+<Layout title="Fallback">
+    <h1 class="text-center text-5xl mt-10 text-white">Outdated Browser Detected</h1>
+    <h2 class="text-center text-3xl mt-5 text-white">
+        We have detected that your browser has an old version of Chrome. <br />
+        Some features, such as logging in are broken. There is partial functionality, such as viewing classes and assignments. <br />
+        Select a class below to view it.
+    </h2>
+    <div class="flex flex-col items-center mt-5">
+        {classes.map(c => (
+            <div onclick={`window.location = "/class/${c.id}"`} style="cursor: pointer;" class="card w-[26rem] bg-info-content sm:w-7/12 h-24 sm:h-20 mt-5">
+                <div class="text-xl items-center justify-center">
+                    <h1 class="text-xl pt-[5%] sm:pt-5 text-center">{c.name}</h1>
+                </div>
+            </div>
+        ))}
+    </div>
+
+</Layout>
