@@ -4,6 +4,16 @@ const supabaseUrl = 'https://tzkfqozchfdkixqkvmoo.supabase.co'
 const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6a2Zxb3pjaGZka2l4cWt2bW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzEwNTg1NTMsImV4cCI6MTk4NjYzNDU1M30.Nbz5rGhfhQ6Mt0133KWRkzlrRWoMuDjiddx64BChsw4"
 export const supabase = createClient(supabaseUrl, key)
 
+const isOptionalChainingSupported = () => {
+  try {
+    eval('const foo = {}; foo?.bar');
+  } catch {
+    return false;
+  }
+
+  return true;
+}
+
 try {
   supabase.auth.onAuthStateChange((event, session) => {
     try {
