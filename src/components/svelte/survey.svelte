@@ -36,6 +36,7 @@
         let list: PostgrestResponse<Class> = await supabase.from("Class")
             .select("*")
             .contains("grades", [grade])
+            .order("name", {ascending: true})
         if(!list.data) {
             return []
         } else {
