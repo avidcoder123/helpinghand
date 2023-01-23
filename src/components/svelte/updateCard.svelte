@@ -24,7 +24,7 @@ let updates = fetch("https://api.github.com/repos/avidcoder123/helpinghand/commi
         - Added GitHub commits with Update log along with Less complex normal log
     </div>
 </div>
-<div class=" card bg-info-content sm:w-1/2 w-80 h-96 overflow-scroll overflow-x-clip">
+<div class=" card bg-info-content sm:w-1/2 w-full h-96 overflow-scroll overflow-x-clip">
     <p class="text-xl pt-[5%] sm:pt-5 text-center text-white">Github Commits</p>
     <div class=" text-lg pl-2 card-body">
         {#await updates then list}
