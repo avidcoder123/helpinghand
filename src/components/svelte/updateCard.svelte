@@ -11,7 +11,7 @@ let updates = fetch("https://api.github.com/repos/avidcoder123/helpinghand/commi
 
 </script>
 
-<main class="flex justify-center mt-5 flex-col sm:flex-row">
+<main class="flex justify-center mt-5 flex-col sm:flex-row ga-12">
 
 <div class=" card bg-info-content sm:w-1/2 w-full h-96 overflow-scroll overflow-x-clip">
     <p class="text-xl pt-[5%] sm:pt-5 text-center text-white">Update Log</p>
