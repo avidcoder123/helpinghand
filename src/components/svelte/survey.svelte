@@ -25,8 +25,11 @@
         }
     }
 
+    $: disabled = classes.length == 0
+
     //Enter data
     function enterData() {
+        disabled = true
         supabase.auth.getUser()
         .then(user => addClasses(user))
         .then(() => location.replace("/dashboard"))
@@ -66,7 +69,7 @@
                 {/each}
             </div>
         {/await}
-        <button on:click={enterData} class="btn btn-primary btn-lg mt-20" class:btn-disabled={classes.length == 0}>Continue</button>
+        <button on:click={enterData} class="btn btn-primary btn-lg mt-20" class:btn-disabled={disabled}>Continue</button>
     {:else}
         <h2 class="text-3xl text-center mt-5">Please select a grade level first.</h2>
     {/if}

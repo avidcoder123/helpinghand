@@ -26,3 +26,10 @@ export interface Question {
     answer: string,
     assignment_id: number
 }
+
+export interface Class_Request {
+    id?: number,
+    name: string,
+    teacher: string,
+    grades: number[]
+}

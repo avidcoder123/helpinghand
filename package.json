@@ -20,6 +20,7 @@
     "astro": "^1.6.15",
     "daisyui": "^2.43.2",
     "lodash": "^4.17.21",
+    "octokit": "^2.0.13",
     "svelte": "^3.46.4",
     "tailwindcss": "^3.0.24"
   }

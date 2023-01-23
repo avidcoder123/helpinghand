@@ -14,6 +14,8 @@
     let assignmentname = ""
     let questions: Question[] = []
 
+    let hover = -1
+
     $: disabled = !(assignmentname != ""
         && questions.length > 0 
         && questions.every(x => x.question.trim() != "" && x.answer.trim() != ""))
@@ -44,6 +46,7 @@
     }
 
     function submit() {
+        disabled = true
         let classId = (new URL(window.location.href)).searchParams
         if (!classId.has("class")) {
             return alert("Error occured: Assignment must be bound to a class")
@@ -62,7 +65,10 @@
             return addQuestions(id)
         })
         .then(() => document.location.href = `/assignment/${id}`)
-        .catch(e => e.message)
+        .catch(e => {
+            disabled = false
+            alert(e.message)
+        })
     }
 </script>
 <div class=" w-screen h-screen">
@@ -72,13 +78,23 @@
     <h1 class="text-white text-4xl my-5">Questions</h1>
     <div class="flex flex-col gap-y-10">
         {#each questions as question, idx}
-            <div class="flex flex-row gap-x-3 w-full items-center justify-center"><h1 class="text-white text-2xl">{idx + 1}.</h1>   
+            <div class="flex flex-row gap-x-3 w-full items-center justify-center" on:mouseenter={() => hover = idx} on:mouseleave={() => hover = -1}>
+                {#if hover == idx}
+                    <button class="btn btn-error btn-sm btn-square btn-outline" on:click={() => {questions.splice(idx, 1); questions = questions}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                {:else}
+                    <h1 class="text-white text-2xl w-8">
+                        {idx + 1}.
+                    </h1>  
+                {/if}
+ 
                 <div class="flex flex-col gap-y-2 w-96 sm:w-[32rem]">
                     <input type="text" bind:value={question.question} placeholder="Question Text" class="input input-bordered input-primary w-96 sm:w-full sm:max-w-lg" />
                     {#if question.is_file}
                         <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="file-input file-input-bordered file-input-primary w-96 sm:w-full sm:max-w-lg" />
                     {:else}
-                        <textarea bind:value={question.answer} class="textarea textarea-primary w-96 sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
+                        <textarea bind:value={question.answer} class="textarea textarea-primary w-full sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
                     {/if}
                 </div>
             </div>
