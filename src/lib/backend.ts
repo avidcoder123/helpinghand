@@ -17,7 +17,7 @@ const isOptionalChainingSupported = () => {
 try {
   supabase.auth.onAuthStateChange((event, session) => {
     try {
-      if (event === 'SIGNED_OUT' || event === 'USER_DELETED') {
+      if ((event === 'SIGNED_OUT' || event === 'USER_DELETED') && typeof document !== "undefined") {
         // delete cookies on sign out
         const expires = new Date(0).toUTCString()
         document.cookie = `my-access-token=; path=/; expires=${expires}; SameSite=Lax; secure`

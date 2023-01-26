@@ -1,0 +1,27 @@
+---
+import { supabase } from "../../../lib/backend";
+import type { Assignment } from "../../../lib/db";
+
+const currentUser = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
+const id = parseInt(Astro.params.id!)
+let obj = (await supabase.from("Assignment").select("*").eq("id", id).limit(1)).data! as Assignment[]
+if(obj.length == 0) {
+    location.href = "/404"
+}
+
+
+if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae789-1eb4-4dbd-b76d-a18d87dbc0d3")) {
+    console.log("Here")
+    let files: string[] = (await supabase.from("Question").select("answer")
+        .eq("assignment_id", id)
+        .eq("is_file", true)).data!.map(x => x.answer)
+    let result = await supabase.storage.from("answers").remove(files)
+    console.log(files)
+        
+    await supabase.from("Question").delete().eq("assignment_id", id)
+    await supabase.from("Assignment").delete().eq("id", id)
+}
+---
+<script is:inline>
+    location.replace("/dashboard")
+</script>
