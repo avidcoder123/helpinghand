@@ -26,7 +26,7 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
 ---
 <h1 class="text-white text-4xl 2xl:text-5xl text-center my-10">{title}</h1>
 <div class="flex flex-row items-center justify-center">
-    {owner && <button class="btn btn-error" onclick={`window.location='/assignment/delete/${id}'`}>Delete Assignment</button>}
+    {owner && <button class="btn btn-error" onclick={`confirm("Are you sure?")&&window.location='/assignment/delete/${id}'`}>Delete Assignment</button>}
 </div>
 {questions.map(question => (
     <div class="flex flex-col items-center">
