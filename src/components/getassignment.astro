@@ -1,6 +1,6 @@
 ---
 import { supabase } from "../lib/backend";
-import type { Question } from "../lib/db";
+import type { Assignment, Question } from "../lib/db";
 
 export interface Props {
     id: number
@@ -8,23 +8,26 @@ export interface Props {
 
 let { id } = Astro.props
 
-async function getTitle() {
-    let obj = (await supabase.from("Assignment").select("name").eq("id", id).limit(1)).data!
-    if(obj.length == 0) {
-        location.href = "/404"
-    }
-    let title = obj[0].name
-    return title
+
+let obj = (await supabase.from("Assignment").select("*").eq("id", id).limit(1)).data! as Assignment[]
+if(obj.length == 0) {
+    location.href = "/404"
 }
-async function getQuestions() {
-    let questions: Question[] = (await supabase.from("Question").select("*").eq("assignment_id", id).order("number", { ascending: true })).data!
-    return questions
+let title = obj[0].name
+
+const currentUser = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
+let owner = false
+if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae789-1eb4-4dbd-b76d-a18d87dbc0d3")) {
+    owner = true
 }
 
-let title = await getTitle()
-let questions = await getQuestions()
+let questions: Question[] = (await supabase.from("Question").select("*").eq("assignment_id", id).order("number", { ascending: true })).data!
+
 ---
 <h1 class="text-white text-4xl 2xl:text-5xl text-center my-10">{title}</h1>
+<div class="flex flex-row items-center justify-center">
+    {owner && <button class="btn btn-error" onclick={`window.location='/assignment/delete/${id}'`}>Delete Assignment</button>}
+</div>
 {questions.map(question => (
     <div class="flex flex-col items-center">
         <div class="flex flex-col items-center gap-y-5 my-5">
