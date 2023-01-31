@@ -93,6 +93,11 @@
                     <input type="text" bind:value={question.question} placeholder="Question Text" class="input input-bordered input-primary w-96 sm:w-full sm:max-w-lg" />
                     {#if question.is_file}
                         <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="file-input file-input-bordered file-input-primary w-96 sm:w-full sm:max-w-lg" />
+                        <!-- Preview the image -->
+                        {#if question.files}
+                            <!-- svelte-ignore a11y-missing-attribute -->
+                            <img src={URL.createObjectURL(question.files[0])} class="w-96 sm:w-full sm:max-w-lg" />
+                        {/if}
                     {:else}
                         <textarea bind:value={question.answer} class="textarea textarea-primary w-full sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
                     {/if}
