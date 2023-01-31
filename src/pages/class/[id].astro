@@ -14,7 +14,6 @@ const currentUser = (await supabase.auth.getUser(Astro.cookies.get("my-access-to
 //Resolve class
 async function resolve(): Promise<Class[] | Response> {
     try {
-        const currentUser = await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)
         let {data: c, error}: PostgrestResponse<Class>= await supabase.from("Class").select("*").eq("id", id).limit(1)
         if(error || c==null) throw error
         return c!
