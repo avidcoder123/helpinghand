@@ -100,7 +100,7 @@
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400"> .PNG, .JPG</p>
                                 </div>
-                                <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" />
+                                <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="hidden"/>
                             </label>
                         </div> 
                         <!-- Preview the image -->
