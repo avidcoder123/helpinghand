@@ -105,7 +105,7 @@
                         <!-- Preview the image -->
                         {#if question.files}
                             <!-- svelte-ignore a11y-missing-attribute -->
-                            <img src={URL.createObjectURL(question.files[0])} class="w-96 sm:w-full sm:max-w-lg" />
+                            <img src={URL.createObjectURL(question.files[0])} class="w-96 sm:w-full sm:max-w-lg pt-6" />
                         {/if}
                     {:else}
                         <textarea bind:value={question.answer} class="textarea textarea-primary w-full sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
