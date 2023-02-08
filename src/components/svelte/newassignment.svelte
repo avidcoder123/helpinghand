@@ -93,16 +93,15 @@
                     <input type="text" bind:value={question.question} placeholder="Question Text" class="input input-bordered input-primary w-96 sm:w-full sm:max-w-lg" />
                     {#if question.is_file}
                         <!-- <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="btn bg-base-content w-96 h-96 sm:w-full sm:max-w-lg" /> -->
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400"> .PNG, .JPG</p>
-                                </div>
-                                <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type="file" class="w-full h-full opacity-0"/>
+                        <div class="flex w-full h-screen items-center justify-center bg-grey-lighter">
+                            <label class="w-64 flex flex-col items-center px-4 py-6 bg-base-content rounded-lg shadow-lg tracking-wide uppercase text-white">
+                                <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                </svg>
+                                <span class="mt-2 text-base leading-normal">Select a file</span>
+                                <input bind:files={question.files} on:change={() => question.answer = Date.now().toString()} accept="image/png, image/jpeg" type='file' class="hidden" />
                             </label>
-                        </div> 
+                        </div>
                         <!-- Preview the image -->
                         {#if question.files}
                             <!-- svelte-ignore a11y-missing-attribute -->
