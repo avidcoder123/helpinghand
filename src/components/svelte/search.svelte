@@ -40,7 +40,8 @@ async function searchReq(){
     <input type="text" bind:value={text} on:input={searchReq} placeholder="Search" class="input input-bordered input-primary flex justify-center w-96"/>
     <div class="flex flex-col overflow-y-auto max-h-72 w-96 card bg-info-content shadow-xl rounded-lg mt-2">
         {#each results as res}
-          <div class="w-96 p-4">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <div class="w-96 p-4 cursor-pointer hover:bg-zinc-900" on:click={() => document.location.href = `/assignment/${res.id}`}>
             <h3 class="text-lg font-bold">{res.name}</h3>
             <p class="text-gray-500">Class: {clas.find((x) => x.id == res.class_id).name}</p>
           </div>
