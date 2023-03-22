@@ -37,9 +37,10 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
                     <div class="flex justify-center">
                         <img class="hover:scale-125" width="40%" alt="Answers" src={"https://tzkfqozchfdkixqkvmoo.supabase.co/storage/v1/object/public/answers/" + question.answer}>
                     </div>
-                </a>) :
-                <p class="text-lg 2xl:text-2xl text-left w-[85%] sm:w-[36rem] leading-snug whitespace-pre-line"><span class=" text-blue-500">Answer:</span><br />{question.answer}</p>
+                </a>) : 
+                <p class="text-lg 2xl:text-2xl text-left w-[85%] sm:w-[36rem] leading-snug whitespace-pre-line"><span class=" text-blue-500">Answer:</span><br />{question.answer}</p> 
             }
+            {question.answer.slice(0,7)=='https://' && <a href="question.answer">Link</a>}
         </div>
     </div>
 ))}
