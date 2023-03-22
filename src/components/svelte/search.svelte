@@ -2,25 +2,26 @@
   import { onMount } from "svelte";
 import { supabase } from "../../lib/backend";
 
-let results = [] as any;
+let results: any[] = [];
 let text = '';
 
-let class = [] as any;
+let clas = [] as any;
+
 onMount(async () => {
   const { data: lang, error } = await supabase
             .from("Class")
             .select("*")
             .order("id", { ascending: false })
             .limit(10)
-            class = lang || [];
-}
+            clas = lang || [];     
+})
 
-    async function searchReq(){
+async function searchReq(){
     const { data: searchResults, error: er} = await supabase
-        .from('Assignments')
+        .from('Assignment')
         .select("*")
         // search the title and description for the search term
-        .ilike("title", `%${text}%`)
+        .ilike("name", `%${text}%`)
         .order("id", { ascending: false })
         .limit(10)
         console.log(searchResults)
@@ -31,17 +32,28 @@ onMount(async () => {
             results = [];
         }
     }
+
 </script>
 
-<div>
-
-    <input type="text" bind:value={text} on:input={searchReq} placeholder="Search" class=""/>
-    <div class="flex flex-col">
+<div class="flex justify-center pt-3">
+<div class="items-center">
+    <input type="text" bind:value={text} on:input={searchReq} placeholder="Search" class="input input-bordered input-primary flex justify-center w-96"/>
+    <div class="flex flex-col overflow-y-auto max-h-72 w-96 card bg-info-content shadow-xl rounded-lg mt-2">
         {#each results as res}
-          <div>
-            <h3 class="text-lg font-bold">{res.title}</h3>
+          <div class="w-96 p-4">
+            <h3 class="text-lg font-bold">{res.name}</h3>
+            <p class="text-gray-500">Class: {clas.find((x) => x.id == res.class_id).name}</p>
           </div>
+          <!-- divider -->
+          <div class="border-t-2 border-gray-200"></div>
         {/each}
       </div>
-
 </div>
+</div>
+
+<style>
+  /* hide scroll bars */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>

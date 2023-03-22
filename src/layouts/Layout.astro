@@ -1,6 +1,7 @@
 ---
 import { supabase } from '../lib/backend';
 import HHIcon from '../components/image/HHIcon.svg'
+import Search from '../components/svelte/search.svelte';
 
 export interface Props {
 	title: string,
@@ -49,7 +50,7 @@ var authed = currentUser !== null
 	<body>
 		<div data-theme="forest" class="w-full h-full">
 			<div class="hidden sm:block">
-				<div class="navbar bg-info-content" id="Nav">
+				<div class="navbar bg-info-content" id="Nav">			
 					<div class="flex-1">
 						<a class="btn btn-ghost normal-case text-xl text-white" href={authed ? "/dashboard" : "/"}><img src={HHIcon}></a>
 						<div class="flex-none ml-3">
@@ -91,7 +92,10 @@ var authed = currentUser !== null
 					</div>
 				</div>
 			</div>
+			<Search client:only="svelte" />
+
 			{!authed && loggedIn ? <script>location.replace("/")</script> : <slot />}
+			
 		</div>
 	</body>
 </html>
