@@ -15,6 +15,8 @@ let classids = (await supabase.from("Class_User")
 .select("class_id").eq("user_id", user!.id)).data!.map(x => x.class_id)
 
 let classes: Class[] = (await supabase.from("Class").select("*").in("id", classids!)).data!
+
+let username = user?.user_metadata.full_name
 ---
 <script>
     import { supabase } from "../lib/backend"
@@ -27,7 +29,9 @@ let classes: Class[] = (await supabase.from("Class").select("*").in("id", classi
 <Layout title="Dashboard" loggedIn={true}>
     <!-- <h1 class="text-5xl text-center text-white mt-5 h-44">Welcome!</h1> -->
     <div class="flex justify-center h-56 sm:pt-10 2xl:scale-125">
-    <Greeting client:only="svelte"></Greeting>
+    <!-- <Greeting client:only="svelte"></Greeting> -->
+    <p class="text-4xl text-center text-white mt-5 h-44">Welcome, {username}!</p>
+
     </div>
     <!-- <div class="grid grid-cols-1 sm:grid-cols-3 items-center center 2xl:grid-cols-4 mt-10 gap-y-10 sm:gap-12 place-items-center"> -->
     <div class="flex flex-row flex-wrap gap-10 items-center justify-center">
