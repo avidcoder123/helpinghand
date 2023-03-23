@@ -24,7 +24,7 @@
     }
 </script>
 
-<h1 class="text-white text-center mt-10 text-5xl">Request A Class</h1>
+<h1 class="text-white text-center pt-20 text-5xl">Request A Class</h1>
 <div class="flex flex-col mt-10 gap-y-5 items-center">
 
     <h2 class="text-center text-lg sm:text-2xl 2xl:text-4xl mt-10 text-white">Class Name</h2>

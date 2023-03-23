@@ -35,10 +35,10 @@ async function searchReq(){
 
 </script>
 
-<div class="flex justify-center pt-3">
+<div class="flex justify-center pt-1">
 <div class="items-center">
-    <input type="text" bind:value={text} on:input={searchReq} placeholder="Search" class="input input-bordered input-primary flex justify-center w-96"/>
-    <div class="flex flex-col overflow-y-auto max-h-72 w-96 card bg-info-content shadow-xl rounded-lg mt-2">
+    <input type="text" bind:value={text} on:input={searchReq} placeholder="Search" class="input input-bordered input-primary flex justify-center w-auto"/>
+    <div class="flex flex-col overflow-y-auto fixed max-h-72 w-96 card bg-info-content shadow-xl rounded-lg mt-2">
         {#each results as res}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <div class="w-96 p-4 cursor-pointer hover:bg-zinc-900" on:click={() => document.location.href = `/assignment/${res.id}`}>

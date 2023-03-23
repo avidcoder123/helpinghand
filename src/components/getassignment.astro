@@ -24,7 +24,7 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
 let questions: Question[] = (await supabase.from("Question").select("*").eq("assignment_id", id).order("number", { ascending: true })).data!
 
 ---
-<h1 class="text-white text-4xl 2xl:text-5xl text-center my-10">{title}</h1>
+<h1 class="text-white text-4xl 2xl:text-5xl text-center my-10 pt-12">{title}</h1>
 <div class="flex flex-row items-center justify-center">
     {owner && <a href={`/assignment/delete/${id}`} onclick="return confirm('Are you sure?')"><button class="btn btn-error">Delete Assignment</button></a>}
 </div>

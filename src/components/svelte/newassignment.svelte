@@ -72,7 +72,7 @@
     }
 </script>
 <div class=" w-screen h-screen">
-<h1 class="text-white text-center text-5xl mt-10">Make a New Assignment</h1>
+<h1 class="text-white text-center text-5xl pt-16">Make a New Assignment</h1>
 <div class="flex flex-col gap-y-5 items-center mt-10">
     <input type="text" bind:value={assignmentname} placeholder="Assignment Name" class="input input-bordered input-primary w-full max-w-lg" />
     <h1 class="text-white text-4xl my-5">Questions</h1>
