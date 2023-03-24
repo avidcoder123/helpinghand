@@ -1,6 +1,7 @@
 ---
 import { supabase } from '../lib/backend';
 import HHIcon from '../components/image/HHIcon.svg'
+import Search from '../components/svelte/search.svelte';
 
 export interface Props {
 	title: string,
@@ -36,7 +37,7 @@ var authed = currentUser !== null
 </script>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en" data-theme="forest">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -47,15 +48,15 @@ var authed = currentUser !== null
 		<script>window.LogRocket && window.LogRocket.init('helpinghand/helpinghand');</script>
 	</head>
 	<body>
-		<div data-theme="night" class="w-full h-full">
-			<div class="hidden sm:block">
-				<div class="navbar bg-info-content" id="Nav">
+		<div data-theme="forest" class="w-full h-full">
+			<div class="hidden md:block">
+				<div class="navbar bg-info-content fixed top-0 z-50 drop-shadow-lg" id="Nav">			
 					<div class="flex-1">
 						<a class="btn btn-ghost normal-case text-xl text-white" href={authed ? "/dashboard" : "/"}><img src={HHIcon}></a>
 						<div class="flex-none ml-3">
 							<ul class="menu menu-horizontal gap-3">
 								<li><a class="text-xl" href="/updateLog">Update Log  <span class="indicator-item badge badge-error">NEW</span> </a></li>
-
+								<Search client:only="svelte" />
 							</ul>
 						</div>
 					</div>
@@ -74,7 +75,7 @@ var authed = currentUser !== null
 						</div>
 				</div>
 			</div>
-			<div class=" block sm:hidden">
+			<div class=" block md:hidden">
 				<div class="collapse bg-info-content w-full h-auto">
 					<input type="checkbox" /> 
 					<div class="collapse-title text-2xl font-medium text-center">
@@ -91,10 +92,12 @@ var authed = currentUser !== null
 					</div>
 				</div>
 			</div>
-			<div class="w-full h-10 text-center bg-red-200 text-black font-extrabold pt-2">
-				🔥🔥NEW UPDATE DROPS TOMORROW 12 PM CST🔥🔥
-			</div>
+
+			<div class="block md:hidden">
+			<Search client:only="svelte" />
+
 			{!authed && loggedIn ? <script>location.replace("/")</script> : <slot />}
+			
 		</div>
 	</body>
 </html>
@@ -114,6 +117,6 @@ var authed = currentUser !== null
 	}
 
 	:root, body {
-		background-color: #0F1729;
+		background-color: #171212;
 	}
 </style>

@@ -24,7 +24,7 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
 let questions: Question[] = (await supabase.from("Question").select("*").eq("assignment_id", id).order("number", { ascending: true })).data!
 
 ---
-<h1 class="text-white text-4xl 2xl:text-5xl text-center my-10">{title}</h1>
+<h1 class="text-white text-4xl 2xl:text-5xl text-center my-10 pt-12">{title}</h1>
 <div class="flex flex-row items-center justify-center">
     {owner && <a href={`/assignment/delete/${id}`} onclick="return confirm('Are you sure?')"><button class="btn btn-error">Delete Assignment</button></a>}
 </div>
@@ -37,8 +37,7 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
                     <div class="flex justify-center">
                         <img class="hover:scale-125" width="40%" alt="Answers" src={"https://tzkfqozchfdkixqkvmoo.supabase.co/storage/v1/object/public/answers/" + question.answer}>
                     </div>
-                </a>) :
-                <p class="text-lg 2xl:text-2xl text-left w-[85%] sm:w-[36rem] leading-snug whitespace-pre-line"><span class=" text-blue-500">Answer:</span><br />{question.answer}</p>
+                </a>) : (question.answer.startsWith('https://') || question.answer.startsWith('http://') ? <a href={question.answer} target="_blank" class="btn btn-success">Open Link</a> : <p class="text-grey-200 text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] whitespace-pre-wrap"><span class="text-blue-600">Answer: </span>{question.answer}</p>)
             }
         </div>
     </div>
