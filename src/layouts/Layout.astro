@@ -75,7 +75,7 @@ var authed = currentUser !== null
 						</div>
 				</div>
 			</div>
-			<div class=" block md:hidden">
+			<div class="block md:hidden">
 				<div class="collapse bg-info-content w-full h-auto">
 					<input type="checkbox" /> 
 					<div class="collapse-title text-2xl font-medium text-center">
@@ -95,8 +95,10 @@ var authed = currentUser !== null
 
 			<div class="block md:hidden">
 			<Search client:only="svelte" />
+			</div>
 
 			{!authed && loggedIn ? <script>location.replace("/")</script> : <slot />}
+			
 			
 		</div>
 	</body>
