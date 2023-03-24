@@ -92,9 +92,10 @@ var authed = currentUser !== null
 					</div>
 				</div>
 			</div>
+
 			<div class="block md:hidden">
 			<Search client:only="svelte" />
-			</div>
+
 			{!authed && loggedIn ? <script>location.replace("/")</script> : <slot />}
 			
 		</div>
