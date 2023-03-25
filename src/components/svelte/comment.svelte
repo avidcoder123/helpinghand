@@ -59,6 +59,12 @@ async function addComment() {
     </div>
     {#each comments as comment}
     <div class="chat chat-start w-full">
+        <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+                <!-- random avatar from dicebar identicon -->
+                <img src={`https://avatars.dicebear.com/api/identicon/${comment.user_id}.svg`} alt="avatar" />
+            </div>
+          </div>
         <div class="chat-header">
             <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
           </div>
