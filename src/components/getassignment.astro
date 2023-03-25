@@ -1,6 +1,7 @@
 ---
 import { supabase } from "../lib/backend";
 import type { Assignment, Question } from "../lib/db";
+import Comment from "./svelte/comment.svelte";
 
 export interface Props {
     id: number
@@ -42,3 +43,5 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
         </div>
     </div>
 ))}
+
+<Comment pid={id} user={currentUser} client:only="svelte"/>
