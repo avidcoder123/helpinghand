@@ -49,7 +49,7 @@ async function addComment() {
 
 </script>
 
-<main class="flex flex-col justify-center">
+<main class="flex flex-col justify-center items-center place-items-center">
     <h1 class="text-2xl font-bold text-white">Comments</h1>
     <div class="flex-row gap-6">
         <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
@@ -59,7 +59,7 @@ async function addComment() {
     {#each comments as comment}
     <div class="chat chat-start">
         <div class="chat-header">
-            <time class="text-xs opacity-50">{comment.created_at.slice(0, 10)}</time>
+            <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
           </div>
         <div class="chat-bubble chat-bubble-accent">{comment.text}</div>     
     </div>
