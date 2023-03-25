@@ -51,6 +51,8 @@ async function addComment() {
 
 <main class="flex flex-col self-center w-full">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
+<!-- centering -->
+<div class="flex flex-col items-center">
     <div class="flex-row gap-6">
         <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
         ">
@@ -64,4 +66,5 @@ async function addComment() {
         <div class="chat-bubble chat-bubble-accent">{comment.text}</div>     
     </div>
     {/each}
+</div>
 </main>
