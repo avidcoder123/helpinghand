@@ -23,6 +23,8 @@ let comment: Comment = {
 
 let comments: Comment[] = [];
 
+$: disabled = !comment.text;
+
 onMount(async () => {
     const { data, error } = await supabase
         .from('Comment')
@@ -48,18 +50,16 @@ async function addComment() {
 </script>
 
 <main>
-    <h1>Comments</h1>
-    <div class="comments">
-        {#each comments as comment}
-            <div class="comment">
-                <p>{comment.text}</p>
-            </div>
-        {/each}
-    </div>
-    <div class="add-comment">
+    <h1 class="text-2xl font-bold text-white">Comments</h1>
+    {#if !user}
+        <p class="text-white">Please login to comment</p>
+    {/if}
+    {#if user}
+    <div class="">
         <textarea bind:value={comment.text} placeholder="Add a comment"></textarea>
-        <button on:click={addComment}>Add</button>
+        <button class="btn btn-success disabled:btn-error" {disabled} on:click={addComment}>Add</button>
     </div>
+    {/if}
     {#each comments as comment}
         <div class="comment">
             <p>{comment.text}</p>
