@@ -58,6 +58,20 @@ async function addComment() {
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
+    {#if comment.user_id == user.id}
+    <div class="chat chat-end w-full">
+        <div class="chat-image avatar">
+            <div class="w-10 rounded-full outline">
+                <!-- random avatar from dicebar identicon -->
+                <img src={`https://avatars.dicebear.com/api/shapes/${comment.user_id}.svg`} alt="avatar" />
+            </div>
+          </div>
+        <div class="chat-header">
+            <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
+          </div>
+        <div class="chat-bubble chat-bubble-secondary">{comment.text}</div>
+    </div>
+    {:else}
     <div class="chat chat-start w-full">
         <div class="chat-image avatar">
             <div class="w-10 rounded-full outline">
@@ -70,6 +84,7 @@ async function addComment() {
           </div>
         <div class="chat-bubble chat-bubble-primary">{comment.text}</div>     
     </div>
+    {/if}
     {/each}
 </div>
 </main>
