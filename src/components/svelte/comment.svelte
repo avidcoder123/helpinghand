@@ -44,18 +44,20 @@ async function addComment() {
         console.log(error);
     } else {
         comments = [...comments];
+        // refresh the page
+        location.reload();
     }
 }
 
 </script>
-<!-- center -->
-<main class="flex flex-col items-center w-full h-full p-6">
+<!-- center with a width of w-96 -->
+<main class="flex flex-col w-96 mx-auto">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
 <div class="flex flex-col items-center w-full p-6">
     <div class="flex-row gap-6">
-        <textarea class="input input-bordered input-info w-96 mt-2" bind:value={comment.text} placeholder="Add a comment"></textarea>
-        <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
+        <input class="input input-bordered input-info w-96 mt-2" bind:value={comment.text} placeholder="Add a comment" type="text">
+        <button class="btn btn-success disabled:btn-error mt-2 mx-[40%]"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
     {#if comment.user_id == user.id}
