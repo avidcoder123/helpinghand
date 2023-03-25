@@ -49,10 +49,11 @@ async function addComment() {
 
 </script>
 
-<main>
+<main class="flex flex-col justify-center">
     <h1 class="text-2xl font-bold text-white">Comments</h1>
-    <div class="">
-        <textarea bind:value={comment.text} placeholder="Add a comment"></textarea>
+    <div class="flex-row gap-6">
+        <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
+        ">
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
