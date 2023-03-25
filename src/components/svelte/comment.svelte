@@ -49,17 +49,17 @@ async function addComment() {
 
 </script>
 
-<main class="flex flex-col self-center w-full">
+<main class="flex flex-col self-center w-screen">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
 <div class="flex flex-col items-center w-full">
-    <div class="flex-row gap-6 w-full">
+    <div class="flex-row gap-6 w-full self-center">
         <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
         ">
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
-    <div class="chat chat-start">
+    <div class="chat chat-start w-full">
         <div class="chat-header">
             <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
           </div>
