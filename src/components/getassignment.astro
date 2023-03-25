@@ -44,4 +44,4 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
     </div>
 ))}
 
-<Comment pid={id} />
+<Comment pid={id} user={currentUser} />

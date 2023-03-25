@@ -4,9 +4,10 @@ import { onMount } from 'svelte';
 import { supabase } from '../../lib/backend';
 
 export let pid = 0;
+// make the user any
+export let user: any = null;
 
 interface Comment {
-    id: number;
     text: string;
     user_id: number;
     created_at: string;
@@ -14,9 +15,8 @@ interface Comment {
 }
 
 let comment: Comment = {
-    id: 0,
     text: '',
-    user_id: 0,
+    user_id: user.id,
     created_at: new Date().toISOString(),
     comment_of: pid,
 };
