@@ -37,7 +37,7 @@ onMount(async () => {
 });
 
 async function addComment() {
-    const { data, error } = await supabase.from("Comments").insert(comment);
+    const { data, error } = await supabase.from("Comment").insert(comment);
     if (error) {
         console.log(error);
     } else {
