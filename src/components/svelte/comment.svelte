@@ -48,8 +48,8 @@ async function addComment() {
 }
 
 </script>
-
-<main class="flex flex-col self-center w-96">
+<!-- center -->
+<main class="flex flex-col items-center w-full h-full p-6">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
 <div class="flex flex-col items-center w-full p-6">
