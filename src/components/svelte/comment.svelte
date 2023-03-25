@@ -16,7 +16,7 @@ interface Comment {
 
 let comment: Comment = {
     text: '',
-    user_id: 0,
+    user_id: user.id,
     created_at: new Date().toISOString(),
     comment_of: pid,
 };
