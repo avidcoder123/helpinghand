@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { supabase } from "../../lib/backend";
+    import { each } from "svelte/internal";
+import { supabase } from "../../lib/backend";
     import type { Assignment } from "../../lib/db";
     
 
@@ -105,7 +106,10 @@
                         <!-- Preview the image -->
                         {#if question.files}
                             <!-- svelte-ignore a11y-missing-attribute -->
-                            <img src={URL.createObjectURL(question.files[0])} class="w-96 sm:w-full sm:max-w-lg pt-6" />
+                            <!-- get the image that was uploaded -->
+                            {#each question.files as file}
+                                <img src={URL.createObjectURL(file)} class="w-96 h-96 sm:w-full sm:max-w-lg" />
+                            {/each}
                         {/if}
                     {:else}
                         <textarea bind:value={question.answer} class="textarea textarea-primary w-full sm:max-w-lg h-32" placeholder="Question Answer"></textarea>
