@@ -16,7 +16,7 @@ interface Comment {
 
 let comment: Comment = {
     text: '',
-    user_id: user.id,
+    user_id: 0,
     created_at: new Date().toISOString(),
     comment_of: pid,
 };
@@ -52,10 +52,9 @@ async function addComment() {
 <main class="flex flex-col self-center w-screen">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
-<div class="flex flex-col items-center w-full">
-    <div class="flex-row gap-6 w-screen self-center place-items-center place-self-center justify-center">
-        <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
-        ">
+<div class="flex flex-col items-center w-full p-6">
+    <div class="flex-row gap-6">
+        <textarea class="input input-bordered input-info w-96 " bind:value={comment.text} placeholder="Add a comment"></textarea>
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
@@ -63,7 +62,7 @@ async function addComment() {
         <div class="chat-header">
             <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
           </div>
-        <div class="chat-bubble chat-bubble-accent">{comment.text}</div>     
+        <div class="chat-bubble chat-bubble-primary">{comment.text}</div>     
     </div>
     {/each}
 </div>
