@@ -51,18 +51,16 @@ async function addComment() {
 
 <main>
     <h1 class="text-2xl font-bold text-white">Comments</h1>
-    {#if !user}
-        <p class="text-white">Please login to comment</p>
-    {/if}
-    {#if user}
     <div class="">
         <textarea bind:value={comment.text} placeholder="Add a comment"></textarea>
-        <button class="btn btn-success disabled:btn-error" {disabled} on:click={addComment}>Add</button>
+        <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
-    {/if}
     {#each comments as comment}
-        <div class="comment">
-            <p>{comment.text}</p>
-        </div>
+    <div class="chat chat-start">
+        <div class="chat-header">
+            <time class="text-xs opacity-50">{comment.created_at.slice(0, 10)}</time>
+          </div>
+        <div class="chat-bubble chat-bubble-accent">{comment.text}</div>     
+    </div>
     {/each}
 </main>
