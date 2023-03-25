@@ -52,8 +52,8 @@ async function addComment() {
 <main class="flex flex-col self-center w-full">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
-<div class="flex flex-col items-center">
-    <div class="flex-row gap-6">
+<div class="flex flex-col items-center w-full">
+    <div class="flex-row gap-6 w-full">
         <input class="input input-bordered input-info w-full max-w-xs" bind:value={comment.text} placeholder="Add a comment" type="text
         ">
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
