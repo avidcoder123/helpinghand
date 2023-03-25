@@ -60,7 +60,7 @@ async function addComment() {
     {#each comments as comment}
     <div class="chat chat-start w-full">
         <div class="chat-image avatar">
-            <div class="w-10 rounded-full">
+            <div class="w-10 rounded-full outline">
                 <!-- random avatar from dicebar identicon -->
                 <img src={`https://avatars.dicebear.com/api/identicon/${comment.user_id}.svg`} alt="avatar" />
             </div>
