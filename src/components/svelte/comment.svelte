@@ -54,7 +54,7 @@ async function addComment() {
 <!-- centering -->
 <div class="flex flex-col items-center w-full p-6">
     <div class="flex-row gap-6">
-        <textarea class="input input-bordered input-info w-96 " bind:value={comment.text} placeholder="Add a comment"></textarea>
+        <textarea class="input input-bordered input-info w-96 mt-2" bind:value={comment.text} placeholder="Add a comment"></textarea>
         <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
     </div>
     {#each comments as comment}
