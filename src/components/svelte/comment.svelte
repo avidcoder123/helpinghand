@@ -49,7 +49,7 @@ async function addComment() {
 
 </script>
 
-<main class="flex flex-col self-center w-screen">
+<main class="flex flex-col self-center w-96">
     <h1 class="text-4xl font-bold text-white text-center pb-4">Comments</h1>
 <!-- centering -->
 <div class="flex flex-col items-center w-full p-6">
@@ -63,7 +63,7 @@ async function addComment() {
         <div class="chat-image avatar">
             <div class="w-10 rounded-full outline">
                 <!-- random avatar from dicebar identicon -->
-                <img src={`https://avatars.dicebear.com/api/shapes/${comment.user_id}.svg`} alt="avatar" />
+                <img src={`https://avatars.dicebear.com/api/identicon/${comment.user_id}.svg`} alt="avatar" />
             </div>
           </div>
         <div class="chat-header">
@@ -82,7 +82,7 @@ async function addComment() {
         <div class="chat-header">
             <time class="text-xs opacity-50 pl-3">{comment.created_at.slice(0, 10)}</time>
           </div>
-        <div class="chat-bubble chat-bubble-primary">{comment.text}</div>     
+        <div class="chat-bubble chat-bubble-secondary">{comment.text}</div>     
     </div>
     {/if}
     {/each}
