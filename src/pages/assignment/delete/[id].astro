@@ -17,9 +17,12 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
         .eq("is_file", true)).data!.map(x => x.answer)
     let result = await supabase.storage.from("answers").remove(files)
     console.log(files)
-        
+    let  comments: {id: string}[] = (await supabase.from("Comments").select("id").eq("assignment_id", id)).data!  
+
+
     await supabase.from("Question").delete().eq("assignment_id", id)
     await supabase.from("Assignment").delete().eq("id", id)
+    await supabase.from("Comments").delete().in("id", comments.map(x => x.id))
 }
 ---
 <script is:inline>
