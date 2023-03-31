@@ -18,7 +18,7 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
     let result = await supabase.storage.from("answers").remove(files)
     console.log(files)
     let comments = [] as Comments[]
-    const { data, error } = await supabase.from("Comments").select("*").eq("comment_of", id)
+    const { data, error } = await supabase.from("Comment").select("*").eq("comment_of", id)
     if (data) {
         comments = data as Comments[]
     }
