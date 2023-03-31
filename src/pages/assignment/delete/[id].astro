@@ -8,8 +8,6 @@ let obj = (await supabase.from("Assignment").select("*").eq("id", id).limit(1)).
 if(obj.length == 0) {
     location.href = "/404"
 }
-
-
 if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae789-1eb4-4dbd-b76d-a18d87dbc0d3")) {
     console.log("Here")
     let files: string[] = (await supabase.from("Question").select("answer")
@@ -17,20 +15,17 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
         .eq("is_file", true)).data!.map(x => x.answer)
     let result = await supabase.storage.from("answers").remove(files)
     console.log(files)
-    let comments = [] as Comments[]
-    const { data, error } = await supabase.from("Comment").select("*").eq("comment_of", id)
-    if (data) {
-        comments = data as Comments[]
-    }
 
+    // get the comments
+    let comments = (await supabase.from("Comment").select("*").eq("comment_of", id)).data! as Comments[]
 
-
-    await supabase.from("Question").delete().eq("assignment_id", id)
-    await supabase.from("Assignment").delete().eq("id", id)
-    // delete comments
+    // delete the comments
     for(let i = 0; i < comments.length; i++) {
         await supabase.from("Comment").delete().eq("id", comments[i].id)
     }
+        
+    await supabase.from("Question").delete().eq("assignment_id", id)
+    await supabase.from("Assignment").delete().eq("id", id)
 }
 ---
 <script is:inline>
