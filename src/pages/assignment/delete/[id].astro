@@ -27,7 +27,10 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
 
     await supabase.from("Question").delete().eq("assignment_id", id)
     await supabase.from("Assignment").delete().eq("id", id)
-    await supabase.from("Comment").delete().eq("comment_of", id)
+    // delete comments
+    for(let i = 0; i < comments.length; i++) {
+        await supabase.from("Comment").delete().eq("id", comments[i].id)
+    }
 }
 ---
 <script is:inline>
