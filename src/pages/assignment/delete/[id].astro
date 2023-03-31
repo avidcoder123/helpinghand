@@ -1,6 +1,6 @@
 ---
 import { supabase } from "../../../lib/backend";
-import type { Assignment } from "../../../lib/db";
+import type { Assignment, Comments } from "../../../lib/db";
 
 const currentUser = (await supabase.auth.getUser(Astro.cookies.get("my-access-token").value)).data.user
 const id = parseInt(Astro.params.id!)
@@ -17,12 +17,17 @@ if(currentUser && (currentUser.id == obj[0].user_id! || currentUser.id == "0c3ae
         .eq("is_file", true)).data!.map(x => x.answer)
     let result = await supabase.storage.from("answers").remove(files)
     console.log(files)
-    let  comments: {id: string}[] = (await supabase.from("Comments").select("*").eq("comment_of", id)).data!  
+    let comments = [] as Comments[]
+    const { data, error } = await supabase.from("Comments").select("*").eq("comment_of", id)
+    if (data) {
+        comments = data as Comments[]
+    }
+
 
 
     await supabase.from("Question").delete().eq("assignment_id", id)
     await supabase.from("Assignment").delete().eq("id", id)
-    await supabase.from("Comments").delete().in("id", comments.map(x => x.id))
+    await supabase.from("Comments").delete().eq("comment_of", id)
 }
 ---
 <script is:inline>

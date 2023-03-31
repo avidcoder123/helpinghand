@@ -33,3 +33,11 @@ export interface Class_Request {
     teacher: string,
     grades: number[]
 }
+
+export interface Comments {
+    id?: number,
+    text: string,
+    comment_of: number,
+    user_id: string,
+    created_at?: string
+}
