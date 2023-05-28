@@ -42,6 +42,7 @@ let questions: Question[] = (await supabase.from("Question").select("*").eq("ass
             }
         </div>
     </div>
+    <hr>
 ))}
 
 <Comment pid={id} user={currentUser} client:only="svelte"/>
